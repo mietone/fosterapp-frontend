@@ -1,6 +1,7 @@
 #app {
   max-width: 1200px;
   margine: 0 auto;
+  border: 1px solid green;
 }
 
 nav {

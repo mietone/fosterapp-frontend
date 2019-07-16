@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 const LitterPage = () => (
   <div className="jumbotron">
-    <h1>Litters</h1>
-    <p>List of Litters.</p>
-    <Link to="kitten" className="btn btn-primary btn-lg">
+    <h1>Litter Name</h1>
+
+    <Link to="kitten/:id" className="btn btn-primary btn-lg">
       Learn more
     </Link>
+
   </div>
 );
 

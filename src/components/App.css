@@ -2,3 +2,6 @@
   margin-top: 70px;
   border: 1px solid red;
 }
+.container {
+  border: 1px solid green;
+}

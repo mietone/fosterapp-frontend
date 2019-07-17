@@ -6,7 +6,6 @@ class LitterForm extends React.Component {
       name: ""
     }
   }
-  
 
   handleChange = (event) => {
     const litter = { ...this.state.litter, name: event.target.value }

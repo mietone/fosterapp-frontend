@@ -1,0 +1,1 @@
+export const CREATE_LITTER = 'CREATE_LITTER'

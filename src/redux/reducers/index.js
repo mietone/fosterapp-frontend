@@ -1,7 +1,7 @@
-import {combeinReducers} from 'redux'
+import {combineReducers} from 'redux'
 import litters from './litterReducer'
 
-const rootReducer = combeinReducers({
+const rootReducer = combineReducers({
   litters
 })
 

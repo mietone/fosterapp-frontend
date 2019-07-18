@@ -1,5 +1,5 @@
-import { CREATE_LITTER} from './types'
+import * as types from './actionTypes'
 
 export function createLitter(litter) {
-  return {type: CREATE_LITTER, litter}
+  return {type: types.CREATE_LITTER, litter}
 }

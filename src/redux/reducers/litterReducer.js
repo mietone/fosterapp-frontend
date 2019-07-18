@@ -1,11 +1,11 @@
-import { CREATE_LITTER } from './actions/types'
+import * as types from '../actions/actionTypes'
 
 export default function litterReducer(state = [], action) {
   switch(action.type) {
 
-    case CREATE_LITTER:
+    case types.CREATE_LITTER:
       return [...state, { ...action.litter }]
-      
+
     default:
       return state
   }

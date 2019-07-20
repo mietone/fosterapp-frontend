@@ -9,15 +9,21 @@ import KittenCard from "./KittenCard";
 
 class KittensPage extends React.Component {
   componentDidMount() {
-    this.props.actions.loadKittens().catch(error => {
-      // eslint-disable-next-line prefer-template
-      alert("Loading kittens failed" + error);
-    });
+    const { kittens, litters, actions } = this.props;
 
-    this.props.actions.loadLitters().catch(error => {
-      // eslint-disable-next-line prefer-template
-      alert("Loading litters failed" + error);
-    });
+    if (kittens.length === 0) {
+      actions.loadKittens().catch(error => {
+        // eslint-disable-next-line prefer-template
+        alert("Loading kittens failed" + error);
+      });
+    }
+
+    if (litters.length === 0) {
+      actions.loadLitters().catch(error => {
+        // eslint-disable-next-line prefer-template
+        alert("Loading litters failed" + error);
+      });
+    }
   }
 
   render() {
@@ -32,6 +38,7 @@ class KittensPage extends React.Component {
 
 KittensPage.propTypes = {
   kittens: PropTypes.array.isRequired,
+  litters: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
 

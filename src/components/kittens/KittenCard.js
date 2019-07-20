@@ -3,33 +3,33 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const LitterCard = ({ litters }) => (
+const KittenCard = ({ kittens }) => (
   <table className="table">
     <thead>
       <tr>
         <th />
         <th>Name</th>
-        <th>Start Date</th>
-        <th>End Date</th>
+        <th>D.O.B</th>
+        <th>Litter Name</th>
       </tr>
     </thead>
     <tbody>
-      {litters.map(litter => {
+      {kittens.map(kitten => {
         return (
-          <tr key={litter.id}>
+          <tr key={kitten.id}>
             <td>
               <a
                 className="btn btn-light"
-                href={"http://localhost:3000/litter/" + litter.id}
+                href={"http://localhost:3001/api/v1/kitten/" + kitten.id}
               >
                 Watch
               </a>
             </td>
             <td>
-              <Link to={"/litter/" + litter.id}>{litter.name}</Link>
+              <Link to={"/kitten/" + kitten.id}>{kitten.name}</Link>
             </td>
-            <td>{litter.start_date}</td>
-            <td>{litter.end_date}</td>
+            <td>{kitten.dob}</td>
+            <td>{kitten.litter_id}</td>
           </tr>
         );
       })}
@@ -37,8 +37,8 @@ const LitterCard = ({ litters }) => (
   </table>
 );
 
-LitterCard.propTypes = {
-  litters: PropTypes.array.isRequired
+KittenCard.propTypes = {
+  kittens: PropTypes.array.isRequired
 };
 
-export default LitterCard;
+export default KittenCard;

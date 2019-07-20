@@ -1,8 +1,10 @@
-import {combineReducers} from 'redux'
-import litters from './litterReducer'
+import { combineReducers } from "redux";
+import litters from "./litterReducer";
+import kittens from "./kittenReducer";
 
 const rootReducer = combineReducers({
-  litters
-})
+  litters,
+  kittens
+});
 
-export default rootReducer
+export default rootReducer;

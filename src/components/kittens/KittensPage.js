@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import * as kittenActions from "../../redux/actions/kittenActions";
+import * as litterActions from "../../redux/actions/litterActions";
 import KittenCard from "./KittenCard";
 
 class KittensPage extends React.Component {
@@ -11,6 +12,11 @@ class KittensPage extends React.Component {
     this.props.actions.loadKittens().catch(error => {
       // eslint-disable-next-line prefer-template
       alert("Loading kittens failed" + error);
+    });
+
+    this.props.actions.loadLitters().catch(error => {
+      // eslint-disable-next-line prefer-template
+      alert("Loading litters failed" + error);
     });
   }
 
@@ -31,13 +37,26 @@ KittensPage.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    kittens: state.kittens
+    kittens:
+      state.kittens.length === 0
+        ? []
+        : state.kittens.map(kitten => {
+            return {
+              ...kitten,
+              litterName: state.litters.find(l => l.id === kitten.litter_id)
+                .name
+            };
+          }),
+    litter: state.litters
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators(kittenActions, dispatch)
+    actions: {
+      loadKittens: bindActionCreators(kittenActions.loadKittens, dispatch),
+      loadLitters: bindActionCreators(litterActions.loadLitters, dispatch)
+    }
   };
 };
 

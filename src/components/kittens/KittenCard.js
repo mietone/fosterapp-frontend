@@ -29,7 +29,7 @@ const KittenCard = ({ kittens }) => (
               <Link to={"/kitten/" + kitten.id}>{kitten.name}</Link>
             </td>
             <td>{kitten.dob}</td>
-            <td>{kitten.litter_id}</td>
+            <td>{kitten.litterName}</td>
           </tr>
         );
       })}

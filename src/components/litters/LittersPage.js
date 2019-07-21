@@ -8,17 +8,19 @@ import LitterCard from "./LitterCard";
 
 class LittersPage extends React.Component {
   componentDidMount() {
-    this.props.actions.loadLitters().catch(error => {
+    const { actions } = this.props;
+    actions.loadLitters().catch(error => {
       // eslint-disable-next-line prefer-template
       alert("Loading litters failed" + error);
     });
   }
 
   render() {
+    const { litters } = this.props;
     return (
       <div className="container">
         <h3 className="gray-text text-darken-d">Litters</h3>
-        <LitterCard litters={this.props.litters} />
+        <LitterCard litters={litters} />
       </div>
     );
   }

@@ -9,7 +9,7 @@ import KittenCard from "./KittenCard";
 
 class KittensPage extends React.Component {
   componentDidMount() {
-    const { kittens, litters, actions } = this.props;
+    const { litters, kittens, actions } = this.props;
 
     if (kittens.length === 0) {
       actions.loadKittens().catch(error => {
@@ -37,24 +37,24 @@ class KittensPage extends React.Component {
 }
 
 KittensPage.propTypes = {
-  kittens: PropTypes.array.isRequired,
   litters: PropTypes.array.isRequired,
+  kittens: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
     kittens:
-      state.kittens.length === 0
+      state.litters.length === 0
         ? []
         : state.kittens.map(kitten => {
             return {
               ...kitten,
-              litterName: state.litters.find(l => l.id === kitten.litter_id)
-                .name
+              // eslint-disable-next-line prettier/prettier
+              litterName: state.litters.find(l => l.id === kitten.litter_id).name
             };
           }),
-    litter: state.litters
+    litters: state.litters
   };
 };
 

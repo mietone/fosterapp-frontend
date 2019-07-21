@@ -20,9 +20,9 @@ const LitterCard = ({ litters }) => (
             <td>
               <a
                 className="btn btn-light"
-                href={"http://localhost:3000/litter/" + litter.id}
+                href={"http://localhost:3000/litter/" + litter.id + "/edit"}
               >
-                Watch
+                Edit
               </a>
             </td>
             <td>

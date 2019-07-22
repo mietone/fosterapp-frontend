@@ -22,7 +22,7 @@ const KittenCard = ({ kittens }) => (
                 className="btn btn-light"
                 href={"http://localhost:3001/api/v1/kitten/" + kitten.id}
               >
-                Watch
+                Edit
               </a>
             </td>
             <td>

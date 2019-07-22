@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import * as types from "./actionTypes";
-import { handleResponse, handleError } from "../../api/apiUtils";
+import { handleResponse } from "../../api/apiUtils";
 
 const apiUrl = "http://localhost:3001/api/v1/kittens";
 

@@ -7,16 +7,21 @@ const KittenCard = ({ kittens }) => (
   <table className="table">
     <thead>
       <tr>
-        <th />
         <th>Name</th>
         <th>D.O.B</th>
         <th>Litter Name</th>
+        <th />
       </tr>
     </thead>
     <tbody>
       {kittens.map(kitten => {
         return (
           <tr key={kitten.id}>
+            <td>
+              <Link to={"/kitten/" + kitten.id}>{kitten.name}</Link>
+            </td>
+            <td>{kitten.dob}</td>
+            <td>{kitten.litterName}</td>
             <td>
               <a
                 className="btn btn-light"
@@ -25,11 +30,6 @@ const KittenCard = ({ kittens }) => (
                 Edit
               </a>
             </td>
-            <td>
-              <Link to={"/kitten/" + kitten.id}>{kitten.name}</Link>
-            </td>
-            <td>{kitten.dob}</td>
-            <td>{kitten.litterName}</td>
           </tr>
         );
       })}

@@ -3,12 +3,15 @@ const newLitter = {
   name: "",
   start_date: "",
   end_date: "",
-  kitten_attributes: [
+  kittens: [
     {
       id: null,
       name: "",
       dob: "",
+      image: "",
       gender: true,
+      litter_id: "",
+      user_id: "",
       errors: {},
       _destroy: false
     }

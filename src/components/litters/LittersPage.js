@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import * as litterActions from "../../redux/actions/litterActions";
+import * as kittenActions from "../../redux/actions/kittenActions";
 import LitterCard from "./LitterCard";
 
 class LittersPage extends React.Component {

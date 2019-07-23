@@ -5,7 +5,6 @@ import TextInput from "../common/TextInput";
 
 const LitterForm = ({
   litter,
-  kittens,
   onSave,
   onChange,
   saving = false,
@@ -23,23 +22,37 @@ const LitterForm = ({
       <TextInput
         name="name"
         label="Name / ID"
+        placeholder="Enter Litter Name or ID"
         value={litter.name}
         onChange={onChange}
         error={errors.name}
       />
 
       <TextInput
-        name="start_Date"
+        name="start_date"
         label="Start Date"
+        placeholder="Enter foster start date"
         value={litter.start_date}
         onChange={onChange}
-        error={errors.name}
+        error={errors.start_date}
       />
 
       <TextInput
-        name="end_Date"
+        name="end_date"
         label="End Date"
+        placeholder="Enter foster end date"
         value={litter.end_date}
+        onChange={onChange}
+        error={errors.end_date}
+      />
+
+      <h3>Add Kitten</h3>
+
+      <TextInput
+        name="kittenName"
+        label="Kitten Name"
+        placeholder="Enter kitten name"
+        value={litter.kittens.kittenName}
         onChange={onChange}
         error={errors.name}
       />
@@ -52,7 +65,6 @@ const LitterForm = ({
 };
 
 LitterForm.propTypes = {
-  kittens: PropTypes.array.isRequired,
   litter: PropTypes.object.isRequired,
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,

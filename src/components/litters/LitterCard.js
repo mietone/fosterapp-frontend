@@ -7,10 +7,10 @@ const LitterCard = ({ litters }) => (
   <table className="table">
     <thead>
       <tr>
-        <th />
         <th>Name</th>
         <th>Start Date</th>
         <th>End Date</th>
+        <th />
       </tr>
     </thead>
     <tbody>
@@ -18,18 +18,18 @@ const LitterCard = ({ litters }) => (
         return (
           <tr key={litter.id}>
             <td>
-              <a
-                className="btn btn-light"
-                href={"http://localhost:3000/litter/" + litter.id + "/edit"}
-              >
-                Edit
-              </a>
-            </td>
-            <td>
               <Link to={"/litter/" + litter.id}>{litter.name}</Link>
             </td>
             <td>{litter.start_date}</td>
             <td>{litter.end_date}</td>
+            <td>
+              <a
+                className="btn btn-light"
+                href={"http://localhost:3000/litter/" + litter.id}
+              >
+                Edit
+              </a>
+            </td>
           </tr>
         );
       })}

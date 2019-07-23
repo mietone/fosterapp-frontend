@@ -16,12 +16,11 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={LittersPage} />
-        <Route path="/kitten/:id/edit" component={ManageKittenPage} />
+        <Route path="/litter/:id" component={ManageLitterPage} />
+        <Route path="/litter" component={ManageLitterPage} />
+        <Route path="/kitten/:id" component={ManageKittenPage} />
         <Route path="/kitten/:id" component={KittenPage} />
         <Route path="/kittens" component={KittensPage} />
-        <Route path="/litter/:id/edit" component={ManageLitterPage} />
-        <Route path="/litter/new" component={ManageLitterPage} />
-        <Route path="/litter/:id" component={LitterPage} />
         <Route component={PageNotFound} />
       </Switch>
     </div>

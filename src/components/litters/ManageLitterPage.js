@@ -10,25 +10,8 @@ class ManageLitterPage extends React.Component {
     super(props, context);
 
     this.state = {
-      litter: {
-        id: null,
-        name: "",
-        start_date: "",
-        end_date: "",
-        kittens: [
-          {
-            id: null,
-            name: "",
-            dob: "",
-            image: "",
-            gender: true,
-            litter_id: "",
-            user_id: "",
-            errors: {},
-            _destroy: false
-          }
-        ]
-      }
+      litter: Object.assign({}, props.litter),
+      errors: {}
     };
   }
 
@@ -41,7 +24,9 @@ class ManageLitterPage extends React.Component {
 
   saveLitter = event => {
     event.preventDefault();
-    this.props.actions.saveLitter(this.state.litter);
+    this.props.actions.saveLitter(this.state.litter).then(() => {
+      this.props.history.push("/");
+    });
   };
 
   render() {
@@ -63,7 +48,13 @@ ManageLitterPage.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+function getLitterById(litters, id) {
+  const litter = litters.filter(litter => litter.id === id);
+  if (litter) return litter[0];
+  return null;
+}
+
+function mapStateToProps(state, ownProps) {
   const litter = {
     id: null,
     name: "",

@@ -9,19 +9,29 @@ import LitterCard from "./LitterCard";
 
 class LittersPage extends React.Component {
   componentDidMount() {
-    const { actions } = this.props;
-    actions.loadLitters().catch(error => {
-      // eslint-disable-next-line prefer-template
-      alert("Loading litters failed" + error);
-    });
+    const { litters, kittens, actions } = this.props;
+
+    if (kittens.length === 0) {
+      actions.loadKittens().catch(error => {
+        // eslint-disable-next-line prefer-template
+        alert("Loading kittens failed" + error);
+      });
+    }
+
+    if (litters.length === 0) {
+      actions.loadLitters().catch(error => {
+        // eslint-disable-next-line prefer-template
+        alert("Loading litters failed" + error);
+      });
+    }
   }
 
   render() {
-    const { litters } = this.props;
+    const { litters, kittens } = this.props;
     return (
       <div className="container">
-        <h3 className="gray-text text-darken-d">Litters</h3>
-        <LitterCard litters={litters} />
+        <h1 className="gray-text text-darken-d">Litters</h1>
+        <LitterCard litters={litters} kittens={kittens} />
       </div>
     );
   }
@@ -29,18 +39,32 @@ class LittersPage extends React.Component {
 
 LittersPage.propTypes = {
   litters: PropTypes.array.isRequired,
+  kittens: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
+    kittens:
+      state.litters.length === 0
+        ? []
+        : state.kittens.map(kitten => {
+            return {
+              ...kitten,
+              // eslint-disable-next-line prettier/prettier
+              litterCount: state.litters.find(l => l.id === kitten.litter_id).count
+            };
+          }),
     litters: state.litters
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators(litterActions, dispatch)
+    actions: {
+      loadKittens: bindActionCreators(kittenActions.loadKittens, dispatch),
+      loadLitters: bindActionCreators(litterActions.loadLitters, dispatch)
+    }
   };
 };
 

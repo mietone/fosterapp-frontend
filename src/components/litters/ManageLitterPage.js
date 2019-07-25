@@ -48,21 +48,15 @@ ManageLitterPage.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
-function getLitterById(litters, id) {
-  const litter = litters.filter(litter => litter.id === id);
-  if (litter) return litter[0];
-  return null;
-}
-
 function mapStateToProps(state, ownProps) {
   const litter = {
-    id: null,
+    id: "",
     name: "",
     start_date: "",
     end_date: "",
     kittens: [
       {
-        id: null,
+        id: "",
         name: "",
         dob: "",
         image: "",

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable prefer-template */
 import React from "react";
 import PropTypes from "prop-types";
@@ -10,6 +11,7 @@ const LitterCard = ({ litters }) => (
         <th>Name</th>
         <th>Start Date</th>
         <th>End Date</th>
+        <th>kitten(s)</th>
         <th />
       </tr>
     </thead>
@@ -22,6 +24,7 @@ const LitterCard = ({ litters }) => (
             </td>
             <td>{litter.start_date}</td>
             <td>{litter.end_date}</td>
+            <td>{litter.kittenCount} kittens(s)</td>
             <td>
               <a
                 className="btn btn-light"

@@ -45,17 +45,17 @@ LittersPage.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    kittens:
-      state.litters.length === 0
+    litters:
+      state.kittens.length === 0
         ? []
-        : state.kittens.map(kitten => {
+        : state.litters.map(litter => {
             return {
-              ...kitten,
+              ...litter,
               // eslint-disable-next-line prettier/prettier
-              litterCount: state.litters.find(l => l.id === kitten.litter_id).count
+              kittenCount: state.kittens.filter(k => k.litter_id === litter.id).length
             };
           }),
-    litters: state.litters
+    kittens: state.kittens
   };
 };
 

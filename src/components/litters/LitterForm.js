@@ -48,14 +48,14 @@ const LitterForm = ({
 
       <h3>Add Kitten</h3>
 
-      <TextInput
+      {/* <TextInput
         name="kittenName"
         label="Kitten Name"
         placeholder="Enter kitten name"
         value={litter.kittens.kittenName}
         onChange={onChange}
         error={errors.name}
-      />
+      /> */}
 
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? "Saving..." : "Save"}

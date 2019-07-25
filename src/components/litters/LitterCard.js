@@ -24,7 +24,9 @@ const LitterCard = ({ litters }) => (
             </td>
             <td>{litter.start_date}</td>
             <td>{litter.end_date}</td>
-            <td>{litter.kittenCount} kittens(s)</td>
+            <td>
+              {litter.kittenCount !== 0 ? litter.kittenCount : "No kittens"}
+            </td>
             <td>
               <a
                 className="btn btn-light"

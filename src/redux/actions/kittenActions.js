@@ -4,8 +4,6 @@ import { handleResponse } from "../../api/apiUtils";
 
 const apiUrl = "http://localhost:3001/api/v1/kittens";
 
-// async with Thunk
-
 export const loadKittens = () => {
   return dispatch => {
     return fetch(apiUrl)

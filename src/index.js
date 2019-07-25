@@ -1,22 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './custom.scss';
-import './index.css';
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./custom.scss";
+import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
-import configureStore from './redux/configureStore'
-import { Provider } from 'react-redux'
+import { Provider } from "react-redux";
+import App from "./components/App";
+import * as serviceWorker from "./serviceWorker";
+import configureStore from "./redux/configureStore";
+import { loadLitters } from "./redux/actions/litterActions";
+import { loadKittens } from "./redux/actions/kittenActions";
 
-const store = configureStore()
+const store = configureStore();
+store.dispatch(loadLitters());
+store.dispatch(loadKittens());
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <App />
-    </Router> 
+    </Router>
   </Provider>,
-    document.getElementById('root'));
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

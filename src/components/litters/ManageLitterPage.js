@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as litterActions from "../../redux/actions/litterActions";
 import LitterForm from "./LitterForm";
+import { newLitter } from "./newLitter";
 
 class ManageLitterPage extends React.Component {
   constructor(props, context) {
@@ -48,26 +49,17 @@ ManageLitterPage.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
+export function getLitterById(litters, id) {
+  return litters.find(litter => litter.id === id) || null;
+}
+
 function mapStateToProps(state, ownProps) {
-  const litter = {
-    id: "",
-    name: "",
-    start_date: "",
-    end_date: "",
-    kittens: [
-      {
-        id: "",
-        name: "",
-        dob: "",
-        image: "",
-        gender: true,
-        litter_id: "",
-        user_id: "",
-        errors: {},
-        _destroy: false
-      }
-    ]
-  };
+  const litterId = ownProps.match.params.id;
+  // debugger;
+  const litter =
+    litterId && state.litters.length > 0
+      ? getLitterById(state.litters, litterId)
+      : newLitter;
 
   return {
     litter

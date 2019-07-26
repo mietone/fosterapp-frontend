@@ -1,47 +1,44 @@
+/* eslint-disable prefer-template */
 /* eslint-disable no-alert */
-import React from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { loadKittens } from "../../redux/actions/kittenActions";
 import { loadLitters } from "../../redux/actions/litterActions";
+import KittenForm from "./KittenForm";
+import { newKitten } from "./newKitten";
 
-class ManageKittenPage extends React.Component {
-  componentDidMount() {
-    const { litters, kittens, loadKittens, loadLitters } = this.props;
+function ManageKittenPage({
+  litters,
+  kittens,
+  loadLitters,
+  loadKittens,
+  ...props
+}) {
+  const [kitten, setKitten] = useState({ ...props.kitten });
+  const [errors, setErrors] = useState({});
 
+  useEffect(() => {
     if (kittens.length === 0) {
       loadKittens().catch(error => {
-        // eslint-disable-next-line prefer-template
         alert("Loading kittens failed" + error);
       });
     }
 
     if (litters.length === 0) {
       loadLitters().catch(error => {
-        // eslint-disable-next-line prefer-template
         alert("Loading litters failed" + error);
       });
     }
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="container">
-        <h3 className="gray-text text-darken-d">Manage Kitten</h3>
-      </div>
-    );
-  }
+  return <KittenForm kitten={kitten} errors={errors} litters={litters} />;
 }
-
-ManageKittenPage.propTypes = {
-  litters: PropTypes.array.isRequired,
-  kittens: PropTypes.array.isRequired,
-  loadLitters: PropTypes.func.isRequired,
-  loadKittens: PropTypes.func.isRequired
-};
 
 const mapStateToProps = state => {
   return {
+    kitten: newKitten,
     kittens: state.kittens,
     litters: state.litters
   };

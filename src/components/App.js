@@ -18,9 +18,9 @@ function App() {
         <Route exact path="/" component={LittersPage} />
         <Route path="/litter/:id" component={ManageLitterPage} />
         <Route path="/litter" component={ManageLitterPage} />
-        <Route path="/kitten/:id" component={ManageKittenPage} />
-        <Route path="/kitten/:id" component={KittenPage} />
         <Route path="/kittens" component={KittensPage} />
+        <Route path="/kitten/:id" component={ManageKittenPage} />
+        <Route path="/kitten" component={ManageKittenPage} />
         <Route component={PageNotFound} />
       </Switch>
     </div>

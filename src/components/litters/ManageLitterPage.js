@@ -1,76 +1,57 @@
-import React from "react";
-import PropTypes from "prop-types";
+/* eslint-disable prefer-template */
+/* eslint-disable no-alert */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as litterActions from "../../redux/actions/litterActions";
+import { loadLitters } from "../../redux/actions/litterActions";
+import { loadKittens } from "../../redux/actions/kittenActions";
 import LitterForm from "./LitterForm";
 import { newLitter } from "./newLitter";
 
-class ManageLitterPage extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+function ManageLitterPage({
+  litters,
+  kittens,
+  loadLitters,
+  loadKittens,
+  ...props
+}) {
+  const [litter, setLitter] = useState({ ...props.litter });
+  const [errors, setErrors] = useState({});
 
-    this.state = {
-      litter: Object.assign({}, props.litter),
-      errors: {}
-    };
-  }
+  useEffect(() => {
+    if (kittens.length === 0) {
+      loadKittens().catch(error => {
+        alert("Loading kittens failed" + error);
+      });
+    }
 
-  updateLitterState = event => {
-    const field = event.target.name;
-    const { litter } = this.state;
-    litter[field] = event.target.value;
-    return this.setState({ litter });
-  };
+    if (litters.length === 0) {
+      loadLitters().catch(error => {
+        alert("Loading litters failed" + error);
+      });
+    }
+  }, []);
 
-  saveLitter = event => {
-    event.preventDefault();
-    this.props.actions.saveLitter(this.state.litter).then(() => {
-      this.props.history.push("/");
-    });
-  };
-
-  render() {
-    return (
-      <div className="container">
-        <LitterForm
-          onChange={this.updateLitterState}
-          onSave={this.saveLitter}
-          litter={this.state.litter}
-          errors={this.state.errors}
-        />
-      </div>
-    );
-  }
+  return <LitterForm litter={litter} errors={errors} />;
 }
-
-ManageLitterPage.propTypes = {
-  litter: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
-};
 
 export function getLitterById(litters, id) {
   return litters.find(litter => litter.id === id) || null;
 }
 
 function mapStateToProps(state, ownProps) {
-  const litterId = ownProps.match.params.id;
-  // debugger;
-  const litter =
-    litterId && state.litters.length > 0
-      ? getLitterById(state.litters, litterId)
-      : newLitter;
-
   return {
-    litter
+    litter: newLitter,
+    litters: state.litters,
+    kittens: state.kittens
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(litterActions, dispatch)
-  };
-}
+const mapDispatchToProps = {
+  loadLitters,
+  loadKittens
+};
 
 export default connect(
   mapStateToProps,

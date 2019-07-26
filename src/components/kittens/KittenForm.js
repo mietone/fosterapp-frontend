@@ -3,9 +3,9 @@ import React from "react";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 
-const LitterForm = ({
-  litter,
-  kittens,
+const KittenForm = ({
+  kitten,
+  litters,
   onSave,
   onChange,
   saving = false,
@@ -13,7 +13,7 @@ const LitterForm = ({
 }) => {
   return (
     <form onSubmit={onSave}>
-      <h2>{litter.id ? "Edit" : "Add"} Litter </h2>
+      <h2>{kitten.id ? "Edit" : "Add"} Kitten </h2>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
@@ -22,29 +22,33 @@ const LitterForm = ({
 
       <TextInput
         name="name"
-        label="Name / ID"
-        placeholder="Enter Litter Name or ID"
-        value={litter.name}
+        label="Name"
+        placeholder="Enter Kitten Name"
+        value={kitten.name}
         onChange={onChange}
         error={errors.name}
       />
 
       <TextInput
-        name="start_date"
-        label="Start Date"
-        placeholder="Enter foster start date"
-        value={litter.start_date}
+        name="dob"
+        label="Date of Birth"
+        placeholder="ex. 2019-05-01"
+        value={kitten.dob}
         onChange={onChange}
-        error={errors.start_date}
+        error={errors.dob}
       />
 
-      <TextInput
-        name="end_date"
-        label="End Date"
-        placeholder="Enter foster end date"
-        value={litter.end_date}
+      <SelectInput
+        name="litterId"
+        label="Litter"
+        value={kitten.litterId || ""}
+        defaultOption="Select Litter"
+        options={litters.map(litter => ({
+          value: litter.id,
+          text: litter.name
+        }))}
         onChange={onChange}
-        error={errors.end_date}
+        error={errors.litter}
       />
 
       <button type="submit" disabled={saving} className="btn btn-primary">
@@ -54,4 +58,4 @@ const LitterForm = ({
   );
 };
 
-export default LitterForm;
+export default KittenForm;

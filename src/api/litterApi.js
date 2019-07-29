@@ -18,8 +18,8 @@ export function saveLitter(litter) {
     .catch(handleError);
 }
 
-export function deleteLitter(courseId) {
-  return fetch(baseUrl + courseId, { method: "DELETE" })
+export function deleteLitter(litterId) {
+  return fetch(baseUrl + litterId, { method: "DELETE" })
     .then(handleResponse)
     .catch(handleError);
 }

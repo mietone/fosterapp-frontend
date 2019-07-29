@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
+import { Jumbotron, Container, Row, Col } from "reactstrap";
 import * as litterActions from "../../redux/actions/litterActions";
 import * as kittenActions from "../../redux/actions/kittenActions";
 import LitterCard from "./LitterCard";
@@ -28,10 +29,19 @@ class LittersPage extends React.Component {
 
   render() {
     const { litters, kittens } = this.props;
+    const litterCards = litters.map(litter => {
+      return (
+        <Col className="p-3" sm="4">
+          <LitterCard litter={litter} />
+        </Col>
+      );
+    });
     return (
       <div className="container">
         <h1 className="gray-text text-darken-d">Litters</h1>
-        <LitterCard litters={litters} kittens={kittens} />
+        <Container fluid>
+          <Row>{litterCards}</Row>
+        </Container>
       </div>
     );
   }

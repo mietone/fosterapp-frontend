@@ -1,57 +1,85 @@
-/* eslint-disable prefer-template */
-/* eslint-disable no-alert */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
-import React, { useEffect, useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loadLitters } from "../../redux/actions/litterActions";
-import { loadKittens } from "../../redux/actions/kittenActions";
+import { bindActionCreators } from "redux";
+import * as litterActions from "../../redux/actions/litterActions";
 import LitterForm from "./LitterForm";
 import { newLitter } from "./newLitter";
 
-function ManageLitterPage({
-  litters,
-  kittens,
-  loadLitters,
-  loadKittens,
-  ...props
-}) {
-  const [litter, setLitter] = useState({ ...props.litter });
-  const [errors, setErrors] = useState({});
+class ManageLitterPage extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  useEffect(() => {
-    if (kittens.length === 0) {
-      loadKittens().catch(error => {
-        alert("Loading kittens failed" + error);
-      });
-    }
+    this.state = {
+      litter: Object.assign({}, props.litter),
+      kittens: [{ name: "", dob: "" }],
+      errors: {}
+    };
+  }
 
-    if (litters.length === 0) {
-      loadLitters().catch(error => {
-        alert("Loading litters failed" + error);
-      });
-    }
-  }, []);
+  updateLitterState = event => {
+    const field = event.target.name;
+    const { litter } = this.state;
+    litter[field] = event.target.value;
+    return this.setState({ litter });
+  };
 
-  return <LitterForm litter={litter} errors={errors} />;
+  saveLitter = event => {
+    event.preventDefault();
+    this.props.actions.saveLitter(this.state.litter).then(() => {
+      this.props.history.push("/");
+    });
+  };
+
+  handleClick = event => {
+    this.setState(prevState => ({
+      kittens: [...prevState.kittens, { name: "", age: "" }]
+    }));
+  };
+
+  render() {
+    return (
+      <div className="container">
+        <LitterForm
+          litter={this.state.litter}
+          kittens={this.state.kittens}
+          errors={this.state.errors}
+          onChange={this.updateLitterState}
+          onSave={this.saveLitter}
+          onClick={this.handleClick}
+        />
+      </div>
+    );
+  }
 }
+
+ManageLitterPage.propTypes = {
+  litter: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
+};
 
 export function getLitterById(litters, id) {
   return litters.find(litter => litter.id === id) || null;
 }
 
 function mapStateToProps(state, ownProps) {
+  const litterId = ownProps.match.params.id;
+  // debugger;
+  const litter =
+    litterId && state.litters.length > 0
+      ? getLitterById(state.litters, litterId)
+      : newLitter;
+
   return {
-    litter: newLitter,
-    litters: state.litters,
-    kittens: state.kittens
+    litter
   };
 }
 
-const mapDispatchToProps = {
-  loadLitters,
-  loadKittens
-};
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(litterActions, dispatch)
+  };
+}
 
 export default connect(
   mapStateToProps,

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import * as types from "./actionTypes";
 import { handleResponse } from "../../api/apiUtils";
 import * as litterApi from "../../api/litterApi";

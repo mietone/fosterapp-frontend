@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from "react";
+import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 
 const KittenForm = ({
   kitten,
-  litters,
+  allLitters,
   onSave,
   onChange,
   saving = false,
@@ -39,16 +40,13 @@ const KittenForm = ({
       />
 
       <SelectInput
-        name="litterId"
+        name="litter_id"
         label="Litter"
-        value={kitten.litterId || ""}
+        value={kitten.litter_id || ""}
         defaultOption="Select Litter"
-        options={litters.map(litter => ({
-          value: litter.id,
-          text: litter.name
-        }))}
+        options={allLitters}
         onChange={onChange}
-        error={errors.litter}
+        error={errors.litter_id}
       />
 
       <button type="submit" disabled={saving} className="btn btn-primary">
@@ -56,6 +54,15 @@ const KittenForm = ({
       </button>
     </form>
   );
+};
+
+KittenForm.propTypes = {
+  allLitters: PropTypes.array.isRequired,
+  kitten: PropTypes.object.isRequired,
+  errors: PropTypes.object,
+  onSave: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  saving: PropTypes.bool
 };
 
 export default KittenForm;

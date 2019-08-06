@@ -6,16 +6,7 @@ import * as litterActions from "../../redux/actions/litterActions";
 import LitterForm from "./LitterForm";
 import { newLitter } from "./newLitter";
 
-class ManageLitterPage extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      litter: Object.assign({}, props.litter),
-      errors: {}
-    };
-  }
-
+class ManageLitter extends React.Component {
   updateLitterState = event => {
     const field = event.target.name;
     const { litter } = this.state;
@@ -41,22 +32,16 @@ class ManageLitterPage extends React.Component {
   // };
 
   render() {
-    console.log("LITTER-ID?", this.state.litter);
+    console.log("LITTER-ID?");
     return (
       <div className="">
-        <LitterForm
-          litter={this.state.litter}
-          kittens={this.state.kittens}
-          errors={this.state.errors}
-          onChange={this.updateLitterState}
-          onSave={this.saveLitter}
-        />
+        <h2>ID: {this.props.litter.name}        </h2>
       </div>
     );
   }
 }
 
-ManageLitterPage.propTypes = {
+ManageLitter.propTypes = {
   litter: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
@@ -89,4 +74,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ManageLitterPage);
+)(ManageLitter);

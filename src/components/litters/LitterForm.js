@@ -14,7 +14,11 @@ const LitterForm = ({
 }) => {
   return (
     <form onSubmit={onSave}>
-      <h2>{litter.id ? "Edit" : "Add"} Litter </h2>
+      <div>
+        <h1 className="gray-text text-darken-d display-1">
+          {litter.id ? "Edit" : "Add"} Litter{" "}
+        </h1>
+      </div>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
@@ -33,7 +37,7 @@ const LitterForm = ({
       <TextInput
         name="start_date"
         label="Start Date"
-        placeholder="Enter foster start date"
+        placeholder="ex. 2019-05-01"
         value={litter.start_date}
         onChange={onChange}
         error={errors.start_date}
@@ -42,43 +46,21 @@ const LitterForm = ({
       <TextInput
         name="end_date"
         label="End Date"
-        placeholder="Enter foster end date"
+        placeholder="ex. 2019-05-30"
         value={litter.end_date}
         onChange={onChange}
         error={errors.end_date}
       />
 
-      <button onClick={handleClick}>Add new kitten</button>
+      <h3>Add Kitten</h3>
 
-      {kittens.map((val, idx) => {
-        const kittenId = `kitten-${idx}`;
-        const dobId = `dob-${idx}`;
-        return (
-          <div key={idx} className="form-group">
-            <label hmtlFor={kittenId}>{`Kitten #${idx + 1}`}</label>
-            <div className="field">
-              <input
-                type="text"
-                name={kittenId}
-                placeholder="Enter kitten name"
-                data-id={idx}
-                id={kittenId}
-                className="name"
-              />
-            </div>
-
-            <label hmtlFor={dobId}>Date of Birth</label>
-            <input
-              type="text"
-              name={dobId}
-              placeholder="ex. 2019-05-01"
-              data-id={idx}
-              id={dobId}
-              className="dob"
-            />
-          </div>
-        );
-      })}
+      <TextInput
+        name="litter.kittens.name"
+        label="Kitten Name"
+        placeholder="Enter Kitten Name"
+        value={litter.kittens.name}
+        onChange={onChange}
+      />
 
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? "Saving..." : "Save"}
@@ -93,6 +75,7 @@ LitterForm.propTypes = {
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
   saving: PropTypes.bool
 };
 

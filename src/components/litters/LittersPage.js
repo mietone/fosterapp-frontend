@@ -31,17 +31,17 @@ class LittersPage extends React.Component {
     const { litters, kittens } = this.props;
     const litterCards = litters.map(litter => {
       return (
-        <Col className="p-3" sm="4">
+        <Col className="p-3" sm="4" key={litter.id}>
           <LitterCard litter={litter} />
         </Col>
       );
     });
     return (
-      <div className="container">
-        <h1 className="gray-text text-darken-d">Litters</h1>
-        <Container fluid>
+      <div className="">
+        <h1 className="gray-text text-darken-d display-1">Litters</h1>
+        <div>
           <Row>{litterCards}</Row>
-        </Container>
+        </div>
       </div>
     );
   }

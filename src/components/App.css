@@ -1,7 +1,11 @@
 .container-fluid {
-  margin-top: 70px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .container {
+  margin: 20 100;
   border: 1px solid green;
+}
+
+.display-1 {
+  color: gray;
 }

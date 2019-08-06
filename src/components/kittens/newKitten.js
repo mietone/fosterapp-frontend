@@ -1,5 +1,4 @@
 const newKitten = {
-  id: null,
   name: "",
   dob: "",
   image: "",

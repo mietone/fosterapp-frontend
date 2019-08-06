@@ -28,8 +28,8 @@ class KittensPage extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <h3 className="gray-text text-darken-d">Kittens</h3>
+      <div className="">
+        <h3 className="gray-text text-darken-d display-1">Kittens</h3>
         <KittenCard kittens={this.props.kittens} />
       </div>
     );

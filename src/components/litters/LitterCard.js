@@ -6,11 +6,8 @@ import { Link } from "react-router-dom";
 import {
   Card,
   CardImg,
-  CardText,
   CardBody,
   CardHeader,
-  CardTitle,
-  Button,
   ListGroup,
   ListGroupItem
 } from "reactstrap";
@@ -19,10 +16,15 @@ import catImage from "../../images/thumb_Miles.png";
 const LitterCard = ({ litter }) => (
   <div>
     <Card key={litter.id}>
-      <CardImg top width="100%" src={catImage} alt="Card image cap" />
+      <CardImg
+        top
+        width="100%"
+        src="https://i2.wp.com/metro.co.uk/wp-content/uploads/2017/07/187144066.jpg?quality=90&strip=all&zoom=1&resize=644%2C428&ssl=1"
+        alt="Card image cap"
+      />
       <CardBody>
         <CardHeader tag="h1">
-          <Link to={"/litter/" + litter.id}>{litter.name}</Link>
+          <Link to={"/litter/" + litter.id + "/page"}>{litter.name}</Link>
         </CardHeader>
         <ListGroup>
           <ListGroupItem>
@@ -35,12 +37,7 @@ const LitterCard = ({ litter }) => (
             {litter.kittenCount !== 0 ? litter.kittenCount : "No"} kitten(s)
           </ListGroupItem>
           <ListGroupItem>
-            <a
-              className="btn btn-light"
-              href={"http://localhost:3000/litter/" + litter.id}
-            >
-              Edit
-            </a>
+            <Link to={"/litter/" + litter.id}>Edit {litter.name}</Link>
           </ListGroupItem>
         </ListGroup>
       </CardBody>
@@ -48,8 +45,6 @@ const LitterCard = ({ litter }) => (
   </div>
 );
 
-LitterCard.propTypes = {
-  litters: PropTypes.array.isRequired
-};
+LitterCard.propTypes = {};
 
 export default LitterCard;

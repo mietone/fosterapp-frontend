@@ -7,6 +7,7 @@ import KittensPage from "./kittens/KittensPage";
 import KittenPage from "./kittens/KittenPage";
 import ManageKittenPage from "./kittens/ManageKittenPage";
 import ManageLitterPage from "./litters/ManageLitterPage";
+import ManageLitter from "./litters/ManageLitter";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 
@@ -16,10 +17,10 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={LittersPage} />
+        <Route path="/litter/:id/page" component={LitterPage} />
         <Route path="/litter/:id" component={ManageLitterPage} />
         <Route path="/litter" component={ManageLitterPage} />
         <Route path="/kittens" component={KittensPage} />
-        <Route path="/kitten/:id" component={ManageKittenPage} />
         <Route path="/kitten" component={ManageKittenPage} />
         <Route component={PageNotFound} />
       </Switch>

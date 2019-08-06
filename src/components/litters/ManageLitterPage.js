@@ -16,6 +16,12 @@ class ManageLitterPage extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.litter.id != nextProps.litter.id) {
+      this.setState({ litter: Object.assign({}, nextProps.litter) });
+    }
+  }
+
   updateLitterState = event => {
     const field = event.target.name;
     const { litter } = this.state;

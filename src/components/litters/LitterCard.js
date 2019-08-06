@@ -36,8 +36,19 @@ const LitterCard = ({ litter }) => (
           <ListGroupItem>
             {litter.kittenCount !== 0 ? litter.kittenCount : "No"} kitten(s)
           </ListGroupItem>
-          <ListGroupItem>
-            <Link to={"/litter/" + litter.id}>Edit {litter.name}</Link>
+          <ListGroupItem className="text-center">
+            <Link
+              className="btn btn-light mx-3 text-info"
+              to={"/litter/" + litter.id}
+            >
+              Edit {litter.name}
+            </Link>
+            <Link
+              className="btn btn-light mx-3 text-info"
+              to={"/litter/" + litter.id}
+            >
+              Edit {litter.name}
+            </Link>
           </ListGroupItem>
         </ListGroup>
       </CardBody>

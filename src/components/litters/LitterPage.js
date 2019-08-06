@@ -1,26 +1,33 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-console */
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadKittens } from "../../redux/actions/kittenActions";
+import { Jumbotron, Container, Row, Col } from "reactstrap";
 
-class LitterPage extends React.Component {
-  handleClick = e => {
-    alert("I was clicked");
-  };
-
-  render() {
+const LitterPage = ({ litter }) => {
+  console.log("CHOSEN LITTER IS", litter);
+  const kittenCards = litter.kittens.map(kitten => {
     return (
-      <div className="jumbotron">
-        <h1 className="text-primary display-1">{this.props.litter.name}</h1>
-        <p>LITTER ID: {this.props.litterId}        </p>
-
-        <button onClick={this.handleClick} className="btn btn-primary btn-lg">
-          Load Kittens
-        </button>
-      </div>
+      <Col className="p-3" sm="4" key={kitten.id}>
+        {kitten.name}
+      </Col>
     );
-  }
-}
+  });
+  return (
+    <div className="jumbotron">
+      <h1 className="text-primary display-1">{litter.name}</h1>
+      <p>LITTER ID:{litter.id}</p>
+
+      <h3>Kittens</h3>
+      <div>
+        <Row>{kittenCards}</Row>
+      </div>
+      <p>There are no kittens in this litter</p>
+    </div>
+  );
+};
 
 function mapStateToProps(state, ownProps) {
   const litterId = ownProps.match.params.id;

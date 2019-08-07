@@ -20,7 +20,7 @@ const KittenCard = ({ kittens }) => (
             <td>
               <Link to={"/kitten/" + kitten.id}>{kitten.name}</Link>
             </td>
-            <td>{kitten.dob}</td>
+            <td>{kitten.dob ? kitten.dob : "n/a"}</td>
             <td>{kitten.litterName}</td>
             <td>
               <a

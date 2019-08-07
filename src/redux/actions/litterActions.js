@@ -2,6 +2,7 @@
 import * as types from "./actionTypes";
 import { handleResponse } from "../../api/apiUtils";
 import * as litterApi from "../../api/litterApi";
+import { beginApiCall } from "./apiStatusActions";
 
 const apiUrl = "http://localhost:3001/api/v1/litters";
 
@@ -17,6 +18,7 @@ export function updateLitterSuccess(litter) {
 
 export const loadLitters = () => {
   return dispatch => {
+    dispatch(beginApiCall());
     return fetch(apiUrl)
       .then(handleResponse)
       .then(litters => {
@@ -33,6 +35,7 @@ export const loadLitters = () => {
 
 export const saveLitter = litter => {
   return dispatch => {
+    dispatch(beginApiCall());
     // eslint-disable-next-line prettier/prettier
     return litterApi.saveLitter(litter)
       .then(savedLitter => {

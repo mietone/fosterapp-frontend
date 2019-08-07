@@ -12,8 +12,9 @@ import {
   ListGroupItem
 } from "reactstrap";
 import catImage from "../../images/thumb_Miles.png";
+import { deleteLitter } from "../../api/litterApi";
 
-const LitterCard = ({ litter }) => (
+const LitterCard = ({ litter, onClick }) => (
   <div>
     <Card key={litter.id}>
       <CardImg
@@ -43,12 +44,14 @@ const LitterCard = ({ litter }) => (
             >
               Edit {litter.name}
             </Link>
-            <Link
+          </ListGroupItem>
+          <ListGroupItem className="text-center">
+            <button
               className="btn btn-light mx-3 text-info"
-              to={"/litter/" + litter.id}
+              onClick={() => deleteLitter(litter.id)}
             >
-              Edit {litter.name}
-            </Link>
+              Delete {litter.name}
+            </button>
           </ListGroupItem>
         </ListGroup>
       </CardBody>

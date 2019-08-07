@@ -1,4 +1,5 @@
 export default {
   litters: [],
-  kittens: []
+  kittens: [],
+  apiCallsInProgress: 0
 };

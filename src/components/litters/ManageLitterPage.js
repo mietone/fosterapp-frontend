@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import * as litterActions from "../../redux/actions/litterActions";
 import LitterForm from "./LitterForm";
 import { newLitter } from "./newLitter";
+import Spinner from "../common/Spinner";
 
 class ManageLitterPage extends React.Component {
   constructor(props, context) {
@@ -16,11 +17,16 @@ class ManageLitterPage extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.litter.id != nextProps.litter.id) {
-      this.setState({ litter: Object.assign({}, nextProps.litter) });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.litter.id != prevState.litter.id) {
+      return { litter: Object.assign({}, nextProps.litter) };
     }
   }
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props.litter.id != nextProps.litter.id) {
+  //     this.setState({ litter: Object.assign({}, nextProps.litter) });
+  //   }
+  // }
 
   updateLitterState = event => {
     const field = event.target.name;
@@ -48,7 +54,9 @@ class ManageLitterPage extends React.Component {
 
   render() {
     console.log("LITTER-ID?", this.state.litter);
-    return (
+    return this.props.litter.length === 0 ? (
+      <Spinner />
+    ) : (
       <div className="">
         <LitterForm
           litter={this.state.litter}
@@ -82,7 +90,8 @@ function mapStateToProps(state, ownProps) {
 
   // debugger;
   return {
-    litter
+    litter,
+    litters: allLitters
   };
 }
 

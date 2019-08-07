@@ -3,6 +3,7 @@
 import * as types from "./actionTypes";
 import { handleResponse } from "../../api/apiUtils";
 import * as kittenApi from "../../api/kittenApi";
+import { beginApiCall } from "./apiStatusActions";
 
 const apiUrl = "http://localhost:3001/api/v1/kittens";
 
@@ -18,6 +19,7 @@ export function updateKittenSuccess(kitten) {
 
 export const loadKittens = () => {
   return dispatch => {
+    dispatch(beginApiCall());
     return fetch(apiUrl)
       .then(handleResponse)
       .then(kittens => {
@@ -34,6 +36,7 @@ export const loadKittens = () => {
 
 export const saveKitten = kitten => {
   return dispatch => {
+    dispatch(beginApiCall());
     // eslint-disable-next-line prettier/prettier
     return kittenApi.saveKitten(kitten)
       .then(savedKitten => {

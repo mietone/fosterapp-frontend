@@ -7,6 +7,7 @@ import { Jumbotron, Container, Row, Col } from "reactstrap";
 import * as litterActions from "../../redux/actions/litterActions";
 import * as kittenActions from "../../redux/actions/kittenActions";
 import LitterCard from "./LitterCard";
+import Spinner from "../common/Spinner";
 
 class LittersPage extends React.Component {
   componentDidMount() {
@@ -28,7 +29,7 @@ class LittersPage extends React.Component {
   }
 
   render() {
-    const { litters, kittens } = this.props;
+    const { litters, kittens, deleteLitter } = this.props;
     const litterCards = litters.map(litter => {
       return (
         <Col className="p-3" sm="4" key={litter.id}>
@@ -39,9 +40,7 @@ class LittersPage extends React.Component {
     return (
       <div className="">
         <h1 className="gray-text text-darken-d display-1">Litters</h1>
-        <div>
-          <Row>{litterCards}</Row>
-        </div>
+        <div>{this.props.loading ? <Spinner /> : <Row>{litterCards}</Row>}</div>
       </div>
     );
   }
@@ -50,7 +49,8 @@ class LittersPage extends React.Component {
 LittersPage.propTypes = {
   litters: PropTypes.array.isRequired,
   kittens: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => {
@@ -65,7 +65,8 @@ const mapStateToProps = state => {
               kittenCount: state.kittens.filter(k => k.litter_id === litter.id).length
             };
           }),
-    kittens: state.kittens
+    kittens: state.kittens,
+    loading: state.apiCallsInProgress > 0
   };
 };
 

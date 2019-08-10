@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { toast } from "react-toastify";
 import * as litterActions from "../../redux/actions/litterActions";
 import LitterForm from "./LitterForm";
 import { newLitter } from "./newLitter";
@@ -13,14 +14,16 @@ class ManageLitterPage extends React.Component {
 
     this.state = {
       litter: Object.assign({}, props.litter),
-      errors: {}
+      errors: {},
+      saving: false
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.litter.id != prevState.litter.id) {
+    if (nextProps.litter.id !== prevState.litter.id) {
       return { litter: Object.assign({}, nextProps.litter) };
     }
+    return null;
   }
   // componentWillReceiveProps(nextProps) {
   //   if (this.props.litter.id != nextProps.litter.id) {
@@ -41,10 +44,21 @@ class ManageLitterPage extends React.Component {
 
   saveLitter = event => {
     event.preventDefault();
-    this.props.actions.saveLitter(this.state.litter).then(() => {
-      this.props.history.push("/");
-    });
+    this.setState({ saving: true });
+    this.props.actions
+      .saveLitter(this.state.litter)
+      .then(() => this.redirect())
+      .catch(error => {
+        toast.error(error);
+        this.setState({ saving: false, onSave: error.message });
+      });
   };
+
+  redirect() {
+    this.setState({ saving: false });
+    toast.success("Litter saved.");
+    this.props.history.push("/");
+  }
 
   // handleClick = event => {
   //   this.setState(prevState => ({
@@ -64,6 +78,7 @@ class ManageLitterPage extends React.Component {
           errors={this.state.errors}
           onChange={this.updateLitterState}
           onSave={this.saveLitter}
+          saving={this.state.saving}
         />
       </div>
     );

@@ -3,7 +3,7 @@
 import * as types from "./actionTypes";
 import { handleResponse } from "../../api/apiUtils";
 import * as kittenApi from "../../api/kittenApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 const apiUrl = "http://localhost:3001/api/v1/kittens";
 
@@ -29,6 +29,7 @@ export const loadKittens = () => {
         });
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };

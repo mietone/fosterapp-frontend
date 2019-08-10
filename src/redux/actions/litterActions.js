@@ -2,7 +2,7 @@
 import * as types from "./actionTypes";
 import { handleResponse } from "../../api/apiUtils";
 import * as litterApi from "../../api/litterApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 const apiUrl = "http://localhost:3001/api/v1/litters";
 
@@ -12,6 +12,10 @@ export function createLitterSuccess(litter) {
 
 export function updateLitterSuccess(litter) {
   return { type: types.UPDATE_LITTER_SUCCESS, litter };
+}
+
+export function deleteLitterOptimistic(litter) {
+  return { type: types.DELETE_LITTER_OPTIMISTIC, litter };
 }
 
 // async with Thunk
@@ -28,6 +32,7 @@ export const loadLitters = () => {
         });
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
@@ -44,7 +49,15 @@ export const saveLitter = litter => {
           : dispatch(createLitterSuccess(savedLitter));
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
+  };
+};
+
+export const deleteLitter = litter => {
+  return dispatch => {
+    dispatch(deleteLitterOptimistic(litter));
+    return litterApi.deleteLitter(litter.id);
   };
 };

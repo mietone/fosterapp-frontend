@@ -1,15 +1,15 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import LittersPage from "./litters/LittersPage";
 import LitterPage from "./litters/LitterPage";
 import KittensPage from "./kittens/KittensPage";
-import KittenPage from "./kittens/KittenPage";
 import ManageKittenPage from "./kittens/ManageKittenPage";
 import ManageLitterPage from "./litters/ManageLitterPage";
-import ManageLitter from "./litters/ManageLitter";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
         <Route path="/kitten" component={ManageKittenPage} />
         <Route component={PageNotFound} />
       </Switch>
+      <ToastContainer autoClose={3000} hideProgressBar />
     </div>
   );
 }

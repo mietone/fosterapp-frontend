@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as litterActions from "../../redux/actions/litterActions";
-import LitterForm from "./LitterForm";
 import { newLitter } from "./newLitter";
 
 class ManageLitter extends React.Component {
@@ -35,7 +34,12 @@ class ManageLitter extends React.Component {
     console.log("LITTER-ID?");
     return (
       <div className="">
-        <h2>ID: {this.props.litter.name}        </h2>
+        <h2>
+ID:
+{' '}
+{this.props.litter.name}
+{' '}
+ </h2>
       </div>
     );
   }

@@ -70,12 +70,12 @@ const LitterForm = ({
 };
 
 LitterForm.propTypes = {
-  kittens: PropTypes.array.isRequired,
+  // kittens: PropTypes.array.isRequired,
   litter: PropTypes.object.isRequired,
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  // handleClick: PropTypes.func.isRequired,
   saving: PropTypes.bool
 };
 

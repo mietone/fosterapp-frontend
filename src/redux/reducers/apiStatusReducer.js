@@ -9,9 +9,12 @@ export default function apiCallStatusReducer(
   state = initialState.apiCallsInProgress,
   action
 ) {
+  // eslint-disable-next-line eqeqeq
   if (action.type == types.BEGIN_API_CALL) {
     return state + 1;
-  } if (
+  }
+  if (
+    action.type === types.API_CALL_ERROR ||
     actionTypeEndsInSuccess(action.type)
   ) {
     return state - 1;

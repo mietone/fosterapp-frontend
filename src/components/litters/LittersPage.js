@@ -3,7 +3,8 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import { Jumbotron, Container, Row, Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
+import { toast } from "react-toastify";
 import * as litterActions from "../../redux/actions/litterActions";
 import * as kittenActions from "../../redux/actions/kittenActions";
 import LitterCard from "./LitterCard";
@@ -28,18 +29,27 @@ class LittersPage extends React.Component {
     }
   }
 
+  handleDeleteLitter = litter => {
+    toast.success("litter deleted");
+    const { actions } = this.props;
+    actions.deleteLitter(litter).catch(error => {
+      // eslint-disable-next-line prefer-template
+      toast.error("Delete failed. " + error.message, { autoClose: false });
+    });
+  };
+
   render() {
-    const { litters, kittens, deleteLitter } = this.props;
+    const { litters } = this.props;
     const litterCards = litters.map(litter => {
       return (
         <Col className="p-3" sm="4" key={litter.id}>
-          <LitterCard litter={litter} />
+          <LitterCard onDeleteClick={this.handleDeleteLitter} litter={litter} />
         </Col>
       );
     });
     return (
       <div className="">
-        <h1 className="gray-text text-darken-d display-1">Litters</h1>
+        <h1 className="gray-text display-1">Litters</h1>
         <div>{this.props.loading ? <Spinner /> : <Row>{litterCards}</Row>}</div>
       </div>
     );
@@ -74,7 +84,8 @@ const mapDispatchToProps = dispatch => {
   return {
     actions: {
       loadKittens: bindActionCreators(kittenActions.loadKittens, dispatch),
-      loadLitters: bindActionCreators(litterActions.loadLitters, dispatch)
+      loadLitters: bindActionCreators(litterActions.loadLitters, dispatch),
+      deleteLitter: bindActionCreators(litterActions.deleteLitter, dispatch)
     }
   };
 };

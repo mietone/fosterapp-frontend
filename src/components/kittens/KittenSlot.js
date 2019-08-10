@@ -12,9 +12,9 @@ import {
   ListGroupItem
 } from "reactstrap";
 
-const LitterCard = ({ litter, onDeleteClick }) => (
+const KittenSlot = ({ kitten }) => (
   <div>
-    <Card key={litter.id}>
+    <Card key={kitten.id}>
       <CardImg
         top
         width="100%"
@@ -23,33 +23,22 @@ const LitterCard = ({ litter, onDeleteClick }) => (
       />
       <CardBody>
         <CardHeader tag="h1">
-          <Link to={"/litter/" + litter.id + "/page"}>{litter.name}</Link>
+          <Link to={"/kitten/" + kitten.id + "/page"}>{kitten.name}</Link>
         </CardHeader>
         <ListGroup>
           <ListGroupItem>
-            <h5>Start Date</h5> {litter.start_date}
+            <h5>Date of Birth</h5> {kitten.dob}
           </ListGroupItem>
           <ListGroupItem>
-            <h5>End Date</h5> {litter.end_date}
-          </ListGroupItem>
-          <ListGroupItem>
-            {litter.kittenCount !== 0 ? litter.kittenCount : "No"} kitten(s)
+            <h5>gender</h5> {kitten.gender ? "boy" : "girl"}
           </ListGroupItem>
           <ListGroupItem className="text-center">
             <Link
               className="btn btn-light text-info"
-              to={"/litter/" + litter.id}
+              to={"/kitten/" + kitten.id}
             >
-              Edit {litter.name}
+              Edit {kitten.name}
             </Link>
-          </ListGroupItem>
-          <ListGroupItem className="text-center">
-            <button
-              className="btn btn-light text-info"
-              onClick={() => onDeleteClick(litter)}
-            >
-              Delete {litter.name}
-            </button>
           </ListGroupItem>
         </ListGroup>
       </CardBody>
@@ -57,8 +46,8 @@ const LitterCard = ({ litter, onDeleteClick }) => (
   </div>
 );
 
-LitterCard.propTypes = {
-  onDeleteClick: PropTypes.func.isRequired
+KittenSlot.propTypes = {
+  litters: PropTypes.array.isRequired
 };
 
-export default LitterCard;
+export default KittenSlot;

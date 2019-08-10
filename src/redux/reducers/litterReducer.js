@@ -15,6 +15,9 @@ export default function litterReducer(state = initialState.litters, action) {
         litter.id === action.litter.id ? action.litter : litter
       );
 
+    case types.DELETE_LITTER_OPTIMISTIC:
+      return state.filter(litter => litter.id !== action.litter.id);
+
     default:
       return state;
   }

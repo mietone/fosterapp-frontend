@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as kittenActions from "../../redux/actions/kittenActions";
-import * as litterActions from "../../redux/actions/litterActions";
 import KittenForm from "./KittenForm";
 import { newKitten } from "./newKitten";
 

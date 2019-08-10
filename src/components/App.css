@@ -9,3 +9,37 @@
 .display-1 {
   color: gray;
 }
+
+.Toastify__toast-container {
+  width: 320px;
+}
+.Toastify__toast--default {
+  background: #fff;
+  color: #aaa;
+}
+.Toastify__toast--info {
+  background: #3498db;
+}
+.Toastify__toast--success {
+  background: #07bc0c;
+}
+.Toastify__toast--warning {
+  background: #f1c40f;
+}
+.Toastify__toast--error {
+  background: #e74c3c;
+}
+
+#listAcross {
+  list-style: none;
+  padding: 0;
+  color: gray;
+}
+#listAcross li {
+  display: inline;
+  padding: 0 15px;
+  border-left: solid 1px #bca8e0;
+}
+#listAcross li:first-child {
+  border-left: none;
+}

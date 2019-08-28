@@ -78,7 +78,7 @@ function mapStateToProps(state, ownProps) {
   });
   console.log("littersFormattedForDropdown", littersFormattedForDropdown);
   return {
-    kitten: newKitten,
+    kitten,
     litters: littersFormattedForDropdown
   };
 }

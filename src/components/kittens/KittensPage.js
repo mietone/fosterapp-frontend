@@ -8,6 +8,15 @@ import * as litterActions from "../../redux/actions/litterActions";
 import KittenCard from "./KittenCard";
 
 class KittensPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      message: "",
+      items: []
+    };
+  }
+
   componentDidMount() {
     const { litters, kittens, actions } = this.props;
 
@@ -26,11 +35,44 @@ class KittensPage extends React.Component {
     }
   }
 
+  handleSubmit = event => {
+    event.preventDefault();
+    this.setState({
+      message: "",
+      items: [...this.state.items, this.state.message]
+    });
+  };
+
+  handleMessage = event => {
+    this.setState({
+      message: event.target.value
+    });
+  };
+
   render() {
     return (
       <div className="">
         <h3 className="gray-text text-darken-d display-1">Kittens</h3>
+
         <KittenCard kittens={this.props.kittens} />
+
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              placeholder="type message here"
+              value={this.state.message}
+              onChange={this.handleMessage}
+            />
+            <button>Submit</button>
+          </form>
+          <h2>Messages</h2>
+          <ul>
+            {this.state.items.map((message, index) => (
+              <li key={index}>{message}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

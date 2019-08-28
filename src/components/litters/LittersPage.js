@@ -43,7 +43,11 @@ class LittersPage extends React.Component {
     const litterCards = litters.map(litter => {
       return (
         <Col className="p-3" sm="4" key={litter.id}>
-          <LitterCard onDeleteClick={this.handleDeleteLitter} litter={litter} />
+          <LitterCard
+            onDeleteClick={this.handleDeleteLitter}
+            litter={litter}
+            key={litter.id}
+          />
         </Col>
       );
     });

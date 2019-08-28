@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable prefer-template */
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -47,7 +46,7 @@ const KittenSlot = ({ kitten }) => (
 );
 
 KittenSlot.propTypes = {
-  litters: PropTypes.array.isRequired
+  // litters: PropTypes.array.isRequired
 };
 
 export default KittenSlot;

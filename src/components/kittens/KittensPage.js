@@ -45,7 +45,7 @@ class KittensPage extends React.Component {
 
   handleMessage = event => {
     this.setState({
-      message: event.target.value
+      [event.target.name]: event.target.value
     });
   };
 
@@ -59,6 +59,7 @@ class KittensPage extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <input
+                name="message"
               type="text"
               placeholder="type message here"
               value={this.state.message}
